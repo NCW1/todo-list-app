@@ -1,12 +1,21 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
+import "./App.css";
 
-function TodoList({ todos }) {
+function TodoList({ todos, deleteTodo }) {
 	return (
-		<ul>
+		<ul className="list-group">
 			{todos.map((todo, index) => (
-				<li key={index}>{todo}</li>
+				<li
+					key={index}
+					className="list-group-item d-flex align-items-center justify-content-between"
+				>
+					<span>{todo}</span>
+					<Button variant="danger" onClick={() => deleteTodo(index)}>
+						Delete
+					</Button>
+				</li>
 			))}
 		</ul>
 	);
@@ -21,17 +30,24 @@ function App() {
 		setNewTodo("");
 	}
 
+	function deleteTodo(index) {
+		setTodos(todos.filter((_, i) => i !== index));
+	}
+
 	return (
-		<div className="m-3">
-			<input
-				type="text"
-				value={newTodo}
-				onChange={(event) => setNewTodo(event.target.value)}
-			/>
-			<Button variant="primary" className="ms-3" onClick={addTodo}>
-				Add
-			</Button>
-			<TodoList todos={todos} />
+		<div className="container">
+			<div className="text-center button-container">
+				<input
+					type="text"
+					value={newTodo}
+					onChange={(event) => setNewTodo(event.target.value)}
+					className="form-control input-field"
+				/>
+				<Button variant="primary" className="mt-4" onClick={addTodo}>
+					Add Task
+				</Button>
+			</div>
+			<TodoList todos={todos} deleteTodo={deleteTodo} />
 		</div>
 	);
 }

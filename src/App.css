@@ -1,0 +1,16 @@
+.container {
+	max-width: 600px;
+}
+
+.input-field {
+	border: 2px solid #d3d3d3;
+}
+
+.list-group-item {
+	border: 2px solid #d3d3d3;
+	padding: 15px 17px;
+}
+
+.button-container {
+	margin: 50px 0;
+}
